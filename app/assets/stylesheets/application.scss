@@ -14,14 +14,23 @@
  *= require_self
  */
 
- @import url('//fonts.googleapis.com/css?family=Cousine|Poiret+One|Arimo|Alegreya+Sans+SC&display=swap');
+//  @import url('//fonts.googleapis.com/css?family=Cousine|Poiret+One|Arimo|Alegreya+Sans+SC&display=swap');
 
- $font-family-monospace: Cousine, Andale mono, Consolas, monospace !default;
- $font-family-sans-serif: Arimo, Arial, Helvetica, sans-serif !default;
+//  $font-family-monospace: Cousine, Andale mono, Consolas, monospace !default;
+//  $font-family-sans-serif: Arimo, Arial, Helvetica, sans-serif !default;
 
 //  @import "~bootswatch/dist/darkly/variables";
 //  @import "~bootstrap/scss/bootstrap";
 //  @import "~bootswatch/dist/darkly/bootswatch";
- @import "../node_modules/bootswatch/dist/darkly/variables";
+
+//  $blue:    #2780E3 !default;
+//  $cyan:    #9954BB !default;
+ $font-size-base: 0.8125rem !default;
+ 
+ @import "../node_modules/bootswatch/dist/spacelab/variables";
  @import "../node_modules/bootstrap/scss/bootstrap";
- @import "../node_modules/bootswatch/dist/darkly/bootswatch";
+ @import "../node_modules/bootswatch/dist/spacelab/bootswatch";
+
+ #main {
+   padding-top: 4.5rem;
+ }
