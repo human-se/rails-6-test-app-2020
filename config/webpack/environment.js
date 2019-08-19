@@ -28,6 +28,13 @@ environment.config.merge({
           loader: 'expose-loader',
           options: 'Rails'
         }]
+      },
+      {
+        test: require.resolve('autosize'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'autosize'
+        }]
       }
     ]
   }

@@ -1,5 +1,5 @@
 $('#question-form').remove();
-$('#questions-table').append('<%= j render partial: "form_js", locals: { question: question } %>');
+$('.table-heading').after('<%= j render partial: "form_js", locals: { question: question } %>');
 $('#new-link').hide();
 $(".close").on("click", function() {
   $('#question-form').remove();

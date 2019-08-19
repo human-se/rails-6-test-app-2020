@@ -62,3 +62,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pgreset', '~> 0.1.1'
 # Override partial path for specific view only
 gem 'partial_path_customizer'
+# CSS autoprefixer. Webpack version does not work for asset pipeline files
+gem 'autoprefixer-rails'

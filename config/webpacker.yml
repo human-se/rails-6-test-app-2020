@@ -11,8 +11,7 @@ default: &default
 
   # Additional paths webpack should lookup modules
   # ['app/assets', 'engine/foo/app/assets']
-  resolved_paths: [ ]
-  # resolved_paths: [ 'app/assets' ]
+  resolved_paths: []
 
   # Reload manifest.json on all requests so we reload latest compiled packs
   cache_manifest: false
@@ -35,7 +34,6 @@ default: &default
     - .woff2
 
   extensions:
-    - .jsx
     - .mjs
     - .js
     - .sass
@@ -60,10 +58,9 @@ development:
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
     https: false
-    host: 0.0.0.0
+    host: localhost
     port: 3035
-    # sockPort: 3035
-    public: 0.0.0.0:3035
+    public: localhost:3035
     hmr: false
     # Inline should be set to true if using HMR
     inline: true
@@ -76,14 +73,6 @@ development:
       'Access-Control-Allow-Origin': '*'
     watch_options:
       ignored: '**/node_modules/**'
-    # # This is where webpack-dev-server serves your static
-    # # pages. In this example configuration, put your shell
-    # # page index.html in './views' directory, and it becomes
-    # # accessible from: http://localhost/index.html
-    # contentBase: 'app/views/'
-    # # Make webpack-dev-server live-reload when your
-    # # shell page changes
-    # watchContentBase: true
 
 
 test:
