@@ -9,7 +9,9 @@
 
       <div class="form-group">
       <%
-      order = [question.answer, question.distractor_1, question.distractor_2].shuffle(random: Random.new(seed))
+      order = [question.answer, question.distractor_1]
+      order << question.distractor_2 unless question.distractor_2.nil?
+      order.shuffle!(random: Random.new(seed))
       order.each do |a|
       %>
         <div class="custom-control custom-radio mb-2">

@@ -1,4 +1,6 @@
 class QuizzesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :require_permission, only: [:edit]
   layout 'standard'
 
   def index
@@ -12,7 +14,7 @@ class QuizzesController < ApplicationController
     begin
       quiz = Quiz.find(params[:id])
     rescue
-      redirect_to root_url, status: 404, error: "Quiz not found." and return
+      redirect_to root_url, flash: { error: "Quiz not found." } and return
     end
     respond_to do |format|
       format.html { render :show, locals: { quiz: quiz } }
@@ -24,7 +26,7 @@ class QuizzesController < ApplicationController
     begin
       quiz = Quiz.find(params[:id])
     rescue
-      redirect_back(fallback_location: quizzes_path, status: 404, error: "Quiz not found.") and return
+      redirect_back(fallback_location: quizzes_path, flash: { error: "Quiz not found." }) and return
     end
     respond_to do |format|
       format.html { render :take, locals: { quiz: quiz, user_answers: user_answers } }
@@ -35,7 +37,7 @@ class QuizzesController < ApplicationController
     begin
       quiz = Quiz.find(params[:id])
     rescue
-      redirect_back(fallback_location: quizzes_path, status: 404, error: "Question not found.") and return
+      redirect_back(fallback_location: quizzes_path, flash: { error: "Question not found." }) and return
     end
     puts params[:user_answers]
     if params[:guess] && params[:guess].to_s == question.answer
@@ -52,13 +54,14 @@ class QuizzesController < ApplicationController
 
   def new
     quiz = Quiz.new
+    quiz.user = current_user
     respond_to do |format|
       format.html { render :new, locals: { quiz: quiz } }
     end
   end
 
   def create
-    quiz = Quiz.new(params.require(:quiz).permit(:title, :description))
+    quiz = Quiz.new(params.require(:quiz).permit(:title, :description, :user_id))
     respond_to do |format|
       if quiz.save
         format.html { redirect_to quiz_url(quiz), notice: 'Quiz was successfully created.' }
@@ -72,8 +75,9 @@ class QuizzesController < ApplicationController
   def edit
     begin
       quiz = Quiz.find(params[:id])
+      quiz.user = current_user
     rescue
-      redirect_to root_url, status: 404, error: "Quiz not found." and return
+      redirect_to root_url, flash: { error: "Quiz not found." } and return
     end
     respond_to do |format|
       format.html { render :edit, locals: { quiz: quiz } }
@@ -84,10 +88,10 @@ class QuizzesController < ApplicationController
     begin
       quiz = Quiz.find(params[:id])
     rescue
-      redirect_to root_url, status: 404, error: "Quiz not found." and return
+      redirect_to root_url, flash: { error: "Quiz not found." } and return
     end
     respond_to do |format|
-      if quiz.update(params.require(:quiz).permit(:title, :description))
+      if quiz.update(params.require(:quiz).permit(:title, :description, :user_id))
         format.html { redirect_to quiz_url(quiz), notice: 'Quiz was successfully updated.' }
       else
         flash.now[:error] = 'Error! Unable to update quiz.'
@@ -114,6 +118,13 @@ class QuizzesController < ApplicationController
     end
     respond_to do |format|
       format.js { render :check_answer, locals: { question: question, seed: params[:seed].to_i || nil, user_ans: params["guess_#{question.id}"], correct: correct } }
+    end
+  end
+
+  
+  def require_permission
+    if Quiz.find(params[:id]).user != current_user
+      redirect_to root_path, flash: { error: "You do not have permission to do that." }
     end
   end
 

@@ -64,3 +64,5 @@ gem 'pgreset', '~> 0.1.1'
 gem 'partial_path_customizer'
 # CSS autoprefixer. Webpack version does not work for asset pipeline files
 gem 'autoprefixer-rails'
+# Authentication
+gem 'devise'

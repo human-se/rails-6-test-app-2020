@@ -4,7 +4,8 @@
     <div class="card-body">
       <div class="form-group my-0">
         <%
-        order = [question.answer, question.distractor_1, question.distractor_2]
+        order = [question.answer, question.distractor_1]
+        order << question.distractor_2 unless question.distractor_2.empty?
         order.each do |a|
         %>
           <div class="custom-control custom-radio">

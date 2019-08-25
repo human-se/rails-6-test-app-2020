@@ -5,7 +5,7 @@ class MultipleChoiceQuestionsController < ApplicationController
     begin
       question = MultipleChoiceQuestion.unscoped.limit(1).order("RANDOM()").first
     rescue
-      redirect_to root_url, status: 404, error: "No questions found."
+      redirect_to root_url, flash: { error: "No questions found." } and return
     end
     respond_to do |format|
       format.html { render :random, locals: { question: question, seed: rand(10), user_ans: nil, correct: nil } }
@@ -16,7 +16,7 @@ class MultipleChoiceQuestionsController < ApplicationController
     begin
       question = MultipleChoiceQuestion.find(params[:question_id])
     rescue
-      redirect_to root_url, status: 404, error: "Question not found." and return
+      redirect_to root_url, flash: { error: "Question not found." } and return
     end
     correct = false
     if params["guess_#{question.id}"] && params["guess_#{question.id}"].to_s == question.answer
@@ -44,7 +44,7 @@ class MultipleChoiceQuestionsController < ApplicationController
     begin
       question = MultipleChoiceQuestion.find(params[:id])
     rescue
-      redirect_to root_url, status: 404, error: "Question not found." and return
+      redirect_to root_url, flash: { error: "Question not found." } and return
     end
     respond_to do |format|
       format.html { render :show, locals: { question: question } }
@@ -80,7 +80,7 @@ class MultipleChoiceQuestionsController < ApplicationController
     begin
       question = MultipleChoiceQuestion.find(params[:id])
     rescue
-      redirect_to root_url, status: 404, error: "Question not found." and return
+      redirect_to root_url, flash: { error: "Question not found." } and return
     end
     respond_to do |format|
       format.html { render :edit, locals: { question: question } }
@@ -91,7 +91,7 @@ class MultipleChoiceQuestionsController < ApplicationController
     begin
       question = MultipleChoiceQuestion.find(params[:id])
     rescue
-      redirect_to root_url, status: 404, error: "Question not found." and return
+      redirect_to root_url, flash: { error: "Question not found." } and return
     end
     respond_to do |format|
       if question.update(params.require(:multiple_choice_question).permit(:question, :answer, :distractor_1, :distractor_2))

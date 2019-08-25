@@ -10,7 +10,15 @@
 #  type         :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  quiz_id      :integer
+#  quiz_id      :bigint
+#
+# Indexes
+#
+#  index_questions_on_quiz_id  (quiz_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (quiz_id => quizzes.id)
 #
 
 require 'test_helper'
@@ -45,11 +53,4 @@ class MultipleChoiceQuestionTest < ActiveSupport::TestCase
     assert question.errors.of_kind?(:distractor_1, :blank), question.errors.full_messages.inspect
   end
 
-  test "multiple choice question must have parent quiz" do
-    question = questions(:two)
-    question.quiz = nil
-    assert_not question.valid?, question.errors.full_messages.inspect
-    assert question.errors.count == 1, question.errors.full_messages.inspect
-    assert question.errors.of_kind?(:quiz, "must exist"), question.errors.full_messages.inspect
-  end
 end

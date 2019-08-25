@@ -6,7 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-qz1 = Quiz.create!(title: 'Comp 4081 Basic Concepts', 
+user1 = User.create!(email: 'alice@email.com', password: 'password')
+user2 = User.create!(email: 'bob@email.com', password: 'password')
+
+qz1 = Quiz.create!(user: user1, title: 'Comp 4081 Basic Concepts', 
   description: 'Covers Vagrant virtual machine usage commands and basic MVC architecture.')
 
 q1 = MultipleChoiceQuestion.create!(quiz: qz1, question: 'What does the M in MVC stand for?', 
@@ -33,7 +36,7 @@ q7 = FillBlankQuestion.create!(quiz: qz1, question: 'What console command is use
 q8 = FillBlankQuestion.create!(quiz: qz1, question: 'What console command is used to shutdown a Vagrant virtual machine?',
   answer: 'vagrant halt')
 
-qz2 = Quiz.create!(title: 'Git and Github', 
+qz2 = Quiz.create!(user: user2, title: 'Git and Github', 
   description: 'Covers Git and Github concepts.')
 
 # qz1.questions.concat([q1,q2,q3,q4,q5,q6,q7])

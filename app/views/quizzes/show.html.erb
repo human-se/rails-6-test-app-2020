@@ -5,7 +5,9 @@
 </div>
 
 <div class="text-center">
-  <%= link_to 'Edit Quiz', edit_quiz_path(quiz) %><br>
+  <% if quiz.user == current_user %>
+    <%= link_to 'Edit Quiz', edit_quiz_path(quiz) %><br>
+  <% end %>
   <%= link_to 'Take Quiz', take_quiz_path(quiz) %><br><br>
   <%= link_to 'Show Questions', "", id: "show-questions" %>
   <%= link_to 'Hide Questions', "", id: "hide-questions" %>
@@ -25,6 +27,12 @@
     $('#hide-questions').hide();
   });
   $('#show-questions').on("click", function() {
+    $('#show-questions').toggle();
+    $('#hide-questions').toggle();
+    $('#quiz-questions').toggle();
+    return false;
+  });
+  $('#hide-questions').on("click", function() {
     $('#show-questions').toggle();
     $('#hide-questions').toggle();
     $('#quiz-questions').toggle();

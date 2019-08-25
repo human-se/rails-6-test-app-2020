@@ -1,4 +1,6 @@
 <%= form_with model: quiz, local: true do |form| %>
+  <%= form.hidden_field :user_id, value: quiz.user_id %>
+
   <% invalid = quiz.errors.include?(:title) %>
   <div class="form-group <%= 'has-danger' if invalid %>">
     <%= form.label :title %>

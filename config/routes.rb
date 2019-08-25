@@ -61,8 +61,9 @@
 #                  rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
 
 Rails.application.routes.draw do
+  devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: 'pages#home'
+  root to: 'quizzes#index'
   get 'multiple_choice_questions/random', to: 'multiple_choice_questions#random', as: 'random_multiple_choice_question'
   post 'multiple_choice_questions/random', to: 'multiple_choice_questions#check_answer'
   get 'fill_blank_questions/random', to: 'fill_blank_questions#random', as: 'random_fill_blank_question'

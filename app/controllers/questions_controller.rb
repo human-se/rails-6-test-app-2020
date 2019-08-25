@@ -40,7 +40,7 @@ class QuestionsController < ApplicationController
     begin
       question = Question.find(params[:id])
     rescue
-      redirect_back(fallback_location: edit_quiz_path(Quiz.find(params[:quiz_id])), status: 404, error: "Question not found.") and return
+      redirect_back(fallback_location: edit_quiz_path(Quiz.find(params[:quiz_id])), flash: { error: "Question not found." }) and return
     end
     respond_to do |format|
       format.html { render :edit, locals: { question: question } }
@@ -52,7 +52,7 @@ class QuestionsController < ApplicationController
     begin
       question = Question.find(params[:id])
     rescue
-      redirect_back(fallback_location: edit_quiz_path(Quiz.find(params[:quiz_id])), status: 404, error: "Question not found.") and return
+      redirect_back(fallback_location: edit_quiz_path(Quiz.find(params[:quiz_id])), flash: { error: "Question not found." }) and return
     end
     respond_to do |format|
       if question.update(params.require(:question).permit(:question, :answer, :distractor_1, :distractor_2, :quiz_id, :type))

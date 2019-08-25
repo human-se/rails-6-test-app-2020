@@ -6,7 +6,7 @@ class CreateQuestions < ActiveRecord::Migration[6.0]
       t.string :type
       t.string :distractor_1
       t.string :distractor_2
-      t.integer :quiz_id
+      t.references :quiz, foreign_key: true 
 
       t.timestamps
     end

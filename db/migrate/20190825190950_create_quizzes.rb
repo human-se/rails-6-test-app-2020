@@ -4,6 +4,7 @@ class CreateQuizzes < ActiveRecord::Migration[6.0]
       t.string :title
       t.text :description
       t.integer :questions_count
+      t.references :user, foreign_key: true 
 
       t.timestamps
     end
