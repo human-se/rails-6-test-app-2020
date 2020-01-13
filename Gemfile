@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.0.rc1'
+gem 'rails', '~> 6.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -40,11 +40,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
-  # Adds model attributes/routes to top of model files/routes file
-  gem 'annotate'
-  # Allows local variable inspection with <% require 'pry'; binding.pry %>
-  gem 'pry'
 end
 
 group :test do
@@ -60,9 +55,19 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Disconnects all connections to Postgres db when running rails db:reset
 gem 'pgreset', '~> 0.1.1'
+
+# Adds model attributes/routes to top of model files/routes file
+gem 'annotate', '2.7.5', group: :development
+
+# Authentication
+gem 'devise'
+
+# Cross-user database.yml support
+gem 'dotenv-rails', groups: [:development, :test]
+
+# Allows local variable inspection with <% require 'pry'; binding.pry %>
+gem 'pry', group: :development
 # Override partial path for specific view only
 gem 'partial_path_customizer'
 # CSS autoprefixer. Webpack version does not work for asset pipeline files
 gem 'autoprefixer-rails'
-# Authentication
-gem 'devise'
