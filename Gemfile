@@ -62,9 +62,6 @@ gem 'annotate', '2.7.5', group: :development
 # Authentication
 gem 'devise'
 
-# Cross-user database.yml support
-gem 'dotenv-rails', groups: [:development, :test]
-
 # Allows local variable inspection with <% require 'pry'; binding.pry %>
 gem 'pry', group: :development
 # Override partial path for specific view only
